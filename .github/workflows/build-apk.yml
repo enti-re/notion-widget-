@@ -8,6 +8,7 @@ on:
       - '**.kt'
       - '**.kts'
       - '**.xml'
+      - 'gradle.properties'
       - '.github/workflows/build-apk.yml'
 
 jobs:
