@@ -17,11 +17,9 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import androidx.glance.color.Color
 import androidx.glance.Button
-import androidx.glance.layout.fillMaxWidth
 import androidx.glance.unit.dp
-import androidx.glance.appwidget.action.actionStartActivity
+import androidx.compose.ui.graphics.Color
 
 class LifeWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: android.content.Context, id: GlanceId) {
