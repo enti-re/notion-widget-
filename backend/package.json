@@ -1,0 +1,12 @@
+{
+  "name": "notion-life-widget-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "express": "^4.21.2"
+  }
+}
