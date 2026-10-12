@@ -25,7 +25,7 @@ class MainActivity : Activity() {
     private lateinit var apiKey: EditText
     private val prefs by lazy { getSharedPreferences("life_dashboard", Context.MODE_PRIVATE) }
     private val defaultBackend = "https://notion-life-widget-api.onrender.com"
-    private val defaultWidgetKey = "widget-7Vn4pQ9xL2mR8sK5cT1hF6zB3dW0"
+    private val defaultWidgetKey = ""
     private val ink = Color.rgb(38, 48, 43)
     private val muted = Color.rgb(105, 116, 109)
     private val paper = Color.rgb(248, 249, 246)
