@@ -16,6 +16,7 @@ import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.glance.appwidget.GlanceAppWidgetManager
 
 class MainActivity : Activity() {
     private val executor = Executors.newSingleThreadExecutor()
@@ -123,7 +124,13 @@ class MainActivity : Activity() {
                     status.text = "Synced successfully"
                     recreate()
                 }
-                CoroutineScope(Dispatchers.IO).launch { LifeWidget().updateAll(this@MainActivity) }
+                CoroutineScope(Dispatchers.IO).launch {
+                    val widget = LifeWidget()
+                    val manager = GlanceAppWidgetManager(this@MainActivity)
+                    manager.getGlanceIds(LifeWidget::class.java).forEach { id ->
+                        widget.update(this@MainActivity, id)
+                    }
+                }
             } catch (e: Exception) {
                 runOnUiThread { status.text = "Sync failed: ${e.message ?: "check backend URL and /dashboard response"}" }
             } finally {
