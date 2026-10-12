@@ -15,13 +15,14 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.compose.ui.unit.dp
 
-/**
- * A deliberately simple, offline-first placeholder widget.
- * Keep rendering independent of network/Notion data so it never fails while
- * the Notion integration is being built.
- */
+/** Displays the last successfully synced dashboard snapshot, even when offline. */
 class LifeWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
+        val prefs = context.getSharedPreferences("life_dashboard", Context.MODE_PRIVATE)
+        val tasks = prefs.getString("tasks_preview", "Open Notion Life to connect your backend.") ?: ""
+        val goals = prefs.getString("goals_preview", "Goals appear after first sync.") ?: ""
+        val habits = prefs.getString("habits_preview", "Habits appear after first sync.") ?: ""
+        val syncedAt = prefs.getString("synced_at", null)
         provideContent {
             Column(
                 modifier = GlanceModifier.fillMaxSize().padding(12.dp),
@@ -29,14 +30,17 @@ class LifeWidget : GlanceAppWidget() {
                 horizontalAlignment = Alignment.Horizontal.Start
             ) {
                 Text("NOTION LIFE")
-                Spacer(GlanceModifier.height(8.dp))
-                Text("Your daily dashboard")
-                Spacer(GlanceModifier.height(12.dp))
-                Text("Tasks  •  Goals  •  Habits")
                 Spacer(GlanceModifier.height(6.dp))
-                Text("Calendar: read-only")
-                Spacer(GlanceModifier.height(12.dp))
-                Text("Notion sync is not connected yet.")
+                Text("Today's tasks")
+                Text(tasks.take(220))
+                Spacer(GlanceModifier.height(8.dp))
+                Text("Goals")
+                Text(goals.take(100))
+                Spacer(GlanceModifier.height(8.dp))
+                Text("Habits")
+                Text(habits.take(100))
+                Spacer(GlanceModifier.height(8.dp))
+                Text(if (syncedAt == null) "Not synced yet · open app to connect" else "Showing last synced snapshot")
             }
         }
     }
