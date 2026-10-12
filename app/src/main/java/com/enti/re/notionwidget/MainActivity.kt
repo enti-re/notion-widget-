@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 
+// Main entry point for the Notion widget companion app.
 class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
