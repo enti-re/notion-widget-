@@ -24,6 +24,8 @@ class MainActivity : Activity() {
     private lateinit var endpoint: EditText
     private lateinit var apiKey: EditText
     private val prefs by lazy { getSharedPreferences("life_dashboard", Context.MODE_PRIVATE) }
+    private val defaultBackend = "https://notion-life-widget-api.onrender.com"
+    private val defaultWidgetKey = "widget-7Vn4pQ9xL2mR8sK5cT1hF6zB3dW0"
     private val ink = Color.rgb(38, 48, 43)
     private val muted = Color.rgb(105, 116, 109)
     private val paper = Color.rgb(248, 249, 246)
@@ -63,7 +65,7 @@ class MainActivity : Activity() {
             hint = "https://your-server.example.com"
             setSingleLine(true)
             textSize = 14f
-            setText(prefs.getString("backend_url", ""))
+            setText(prefs.getString("backend_url", defaultBackend))
             setPadding(dp(12), dp(10), dp(12), dp(10))
         }
         content.addView(endpoint, LinearLayout.LayoutParams(-1, dp(52)))
@@ -71,7 +73,7 @@ class MainActivity : Activity() {
             hint = "Widget API key"
             setSingleLine(true)
             textSize = 14f
-            setText(prefs.getString("widget_api_key", ""))
+            setText(prefs.getString("widget_api_key", defaultWidgetKey))
             setPadding(dp(12), dp(10), dp(12), dp(10))
         }
         content.addView(apiKey, LinearLayout.LayoutParams(-1, dp(52)))
@@ -82,7 +84,7 @@ class MainActivity : Activity() {
         }
         content.addView(sync, LinearLayout.LayoutParams(-1, dp(52)))
         addText("Backend contract: GET /dashboard → { tasks: [{title, completed}], goals: [{title, detail}], habits: [{title, completed}], calendar: [{title, date}] }. Keep the Notion integration secret on the server.", 12f, muted, false, 12)
-        if (prefs.getString("backend_url", "").orEmpty().isNotBlank()) status.text = "Backend saved · tap sync to refresh"
+        if (prefs.getString("backend_url", defaultBackend).orEmpty().isNotBlank()) status.text = "Backend configured · tap sync to refresh"
     }
 
     private fun syncDashboard() {
