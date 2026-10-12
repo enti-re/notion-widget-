@@ -22,28 +22,24 @@ import androidx.compose.ui.graphics.Color
 class LifeWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: android.content.Context, id: GlanceId) {
         provideContent {
-            WidgetContent()
-        }
-    }
-
-    @Composable
-    private fun WidgetContent() {
-        Column(
-            modifier = GlanceModifier
-                .fillMaxSize()
-                .background(ColorProvider(Color(0xFFF7F4ED)))
-                .padding(16.dp),
-            verticalAlignment = Alignment.Vertical.Top,
-            horizontalAlignment = Alignment.Horizontal.Start
-        ) {
-            Text("TODAY, WITH INTENTION", style = TextStyle(color = ColorProvider(Color(0xFF69665E))))
-            Spacer(GlanceModifier.height(6.dp))
-            Text("Your life, in one glance", style = TextStyle(color = ColorProvider(Color(0xFF25241F))))
-            Spacer(GlanceModifier.height(12.dp))
-            Text("Tasks from Notion")
-            Text("Goals in progress")
-            Text("Habits to check off")
-            Text("Calendar (read-only)")
+            Column(
+                modifier = GlanceModifier
+                    .fillMaxSize()
+                    .background(ColorProvider(Color(0xFFF7F4ED)))
+                    .padding(16.dp),
+                verticalAlignment = Alignment.Vertical.Top,
+                horizontalAlignment = Alignment.Horizontal.Start
+            ) {
+                Text("NOTION LIFE", style = TextStyle(color = ColorProvider(Color(0xFF69665E))))
+                Spacer(GlanceModifier.height(8.dp))
+                Text("Your daily dashboard", style = TextStyle(color = ColorProvider(Color(0xFF25241F))))
+                Spacer(GlanceModifier.height(12.dp))
+                Text("Tasks  ·  Goals  ·  Habits")
+                Spacer(GlanceModifier.height(6.dp))
+                Text("Calendar is read-only")
+                Spacer(GlanceModifier.height(12.dp))
+                Text("Notion sync is not connected yet.")
+            }
         }
     }
 }
