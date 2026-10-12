@@ -3,7 +3,6 @@ package com.enti.re.notionwidget
 import androidx.compose.runtime.Composable
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
-import androidx.glance.action.actionStartActivity
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
@@ -19,7 +18,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import androidx.glance.Button
-import androidx.glance.unit.dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 
 class LifeWidget : GlanceAppWidget() {
