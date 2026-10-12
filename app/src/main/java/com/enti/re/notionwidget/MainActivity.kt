@@ -22,6 +22,7 @@ class MainActivity : Activity() {
     private lateinit var content: LinearLayout
     private lateinit var status: TextView
     private lateinit var endpoint: EditText
+    private lateinit var apiKey: EditText
     private val prefs by lazy { getSharedPreferences("life_dashboard", Context.MODE_PRIVATE) }
     private val ink = Color.rgb(38, 48, 43)
     private val muted = Color.rgb(105, 116, 109)
@@ -66,6 +67,14 @@ class MainActivity : Activity() {
             setPadding(dp(12), dp(10), dp(12), dp(10))
         }
         content.addView(endpoint, LinearLayout.LayoutParams(-1, dp(52)))
+        apiKey = EditText(this).apply {
+            hint = "Widget API key"
+            setSingleLine(true)
+            textSize = 14f
+            setText(prefs.getString("widget_api_key", ""))
+            setPadding(dp(12), dp(10), dp(12), dp(10))
+        }
+        content.addView(apiKey, LinearLayout.LayoutParams(-1, dp(52)))
         val sync = Button(this).apply {
             text = "Save backend & sync"
             isAllCaps = false
@@ -82,7 +91,7 @@ class MainActivity : Activity() {
             status.text = "Please enter a valid HTTPS backend URL."
             return
         }
-        prefs.edit().putString("backend_url", base).apply()
+        prefs.edit().putString("backend_url", base).putString("widget_api_key", apiKey.text.toString().trim()).apply()
         status.text = "Syncing securely…"
         executor.execute {
             var connection: HttpURLConnection? = null
@@ -92,6 +101,7 @@ class MainActivity : Activity() {
                     connectTimeout = 10000
                     readTimeout = 15000
                     setRequestProperty("Accept", "application/json")
+                    setRequestProperty("X-Widget-Key", apiKey.text.toString().trim())
                 }
                 if (connection.responseCode !in 200..299) throw Exception("Server returned HTTP ${connection.responseCode}")
                 val body = connection.inputStream.bufferedReader().use { it.readText() }
