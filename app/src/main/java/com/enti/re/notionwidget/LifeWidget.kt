@@ -6,7 +6,6 @@ import androidx.glance.GlanceModifier
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
-import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.background
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
@@ -17,7 +16,6 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import androidx.glance.Button
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 
@@ -42,15 +40,10 @@ class LifeWidget : GlanceAppWidget() {
             Spacer(GlanceModifier.height(6.dp))
             Text("Your life, in one glance", style = TextStyle(color = ColorProvider(Color(0xFF25241F))))
             Spacer(GlanceModifier.height(12.dp))
-            Text("☐  Tasks from Notion")
-            Text("○  Goals in progress")
-            Text("□  Habits to check off")
-            Text("▦  Calendar (read-only)")
-            Spacer(GlanceModifier.height(10.dp))
-            androidx.glance.Button(
-                text = "Open dashboard",
-                onClick = actionStartActivity<MainActivity>()
-            )
+            Text("Tasks from Notion")
+            Text("Goals in progress")
+            Text("Habits to check off")
+            Text("Calendar (read-only)")
         }
     }
 }
