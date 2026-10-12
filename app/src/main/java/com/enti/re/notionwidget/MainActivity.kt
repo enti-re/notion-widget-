@@ -13,6 +13,9 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.Executors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : Activity() {
     private val executor = Executors.newSingleThreadExecutor()
@@ -108,7 +111,7 @@ class MainActivity : Activity() {
                     status.text = "Synced successfully"
                     recreate()
                 }
-                LifeWidget().updateAll(this)
+                CoroutineScope(Dispatchers.IO).launch { LifeWidget().updateAll(this@MainActivity) }
             } catch (e: Exception) {
                 runOnUiThread { status.text = "Sync failed: ${e.message ?: "check backend URL and /dashboard response"}" }
             } finally {
