@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Notion Life Widget</string>
+    <string name="widget_description">A quick view of tasks, goals, and habits from Notion.</string>
+</resources>
