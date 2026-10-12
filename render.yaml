@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: notion-life-widget-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NOTION_TOKEN
+        sync: false
+      - key: WIDGET_API_KEY
+        sync: false
+      - key: TASKS_DATABASE_ID
+        sync: false
+      - key: GOALS_DATABASE_ID
+        sync: false
+      - key: HABITS_DATABASE_ID
+        sync: false
+      - key: CALENDAR_DATABASE_ID
+        sync: false
